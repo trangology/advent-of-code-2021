@@ -2,12 +2,12 @@ from typing import List
 
 
 def open_file(filename: str) -> List[int]:
-    f = open(filename, 'r')
-    input = [_ for _ in f]
-    return input
+    with open(filename, 'r') as input:
+        measurements = [int(num) for num in input]
+        return measurements
 
 
-def solve(measurements: List[int]) -> int:
+def count_measurements(measurements: List[int]) -> int:
     result = 0
     for i in range(1, len(measurements)):
         if measurements[i] > measurements[i-1]:
@@ -17,5 +17,5 @@ def solve(measurements: List[int]) -> int:
 
 if __name__ == '__main__':
     measurements = open_file('input.txt')
-    result = solve(measurements)
+    result = count_measurements(measurements)
     print(result)
