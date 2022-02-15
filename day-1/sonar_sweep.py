@@ -15,7 +15,18 @@ def count_measurements(measurements: List[int]) -> int:
     return result
 
 
+def count_sliding_window_measurements(measurements: List[int]) -> int:
+    result = 0
+    for i in range(len(measurements)-3):
+        sum_one = measurements[i] + measurements[i+1] + measurements[i+2]
+        sum_two = measurements[i+1] + measurements[i+2] + measurements[i+3]
+        if sum_two > sum_one:
+            result += 1
+    return result
+
+
 if __name__ == '__main__':
     measurements = open_file('input.txt')
-    result = count_measurements(measurements)
-    print(result)
+    result_one = count_measurements(measurements)
+    result_two = count_sliding_window_measurements(measurements)
+    print(result_one, result_two)
