@@ -2,7 +2,7 @@ import sys
 
 from typing import List
 
-def parse_input(filename: str) -> List[List['Point']]:
+def parse_input(filename: str) -> List[int]:
     with open(filename, 'r') as input:
         return [int(num) for num in input.readline().split(",")]
 
@@ -12,9 +12,7 @@ def calculate_fuel_one(positions: List[int]) -> int:
 
     for i, pos in enumerate(positions):
         fuel = 0
-        for j in range(i):
-            fuel += abs(positions[j] - pos)
-        for j in range(i+1, len(positions)):
+        for j in range(len(positions)):
             fuel += abs(positions[j] - pos)
         min_fuel = min(min_fuel, fuel)
 
@@ -26,10 +24,7 @@ def calculate_fuel_two(positions: List[int]) -> int:
 
     for i, pos in enumerate(positions):
         fuel = 0
-        for j in range(i):
-            supplement = abs(positions[j] - pos)
-            fuel += (supplement + 1) * supplement // 2
-        for j in range(i+1, len(positions)):
+        for j in range(len(positions)):
             supplement = abs(positions[j] - pos)
             fuel += (supplement + 1) * supplement // 2
         min_fuel = min(min_fuel, fuel)
